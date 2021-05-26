@@ -64,7 +64,7 @@
                 </plugins>
                 <resources>
                     <resource>
-                        <directory>../Factions - 2 Velocity/src/main/resources</directory>
+                        <directory>/src/main/resources</directory>
                         <filtering>true</filtering>
                     </resource>
                 </resources>

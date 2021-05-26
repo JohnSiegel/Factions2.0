@@ -6,13 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Factions - 2 Velocity" />
         <module name="Factions 2 - Server" />
+        <module name="Factions 2 - Velocity" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Factions - 2 Velocity" target="1.8" />
       <module name="Factions 2 - Server" target="1.8" />
+      <module name="Factions 2 - Velocity" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
