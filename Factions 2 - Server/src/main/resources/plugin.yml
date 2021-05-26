@@ -1,0 +1,4 @@
+name: Factions2
+version: ${project.version}
+main: com.sosa.factions2server.Factions2Server
+api-version: 1.16
