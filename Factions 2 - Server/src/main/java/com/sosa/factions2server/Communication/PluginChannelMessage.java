@@ -1,5 +1,6 @@
 package com.sosa.factions2server.Communication;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class PluginChannelMessage {
     {
         int splitIndex = fromString.indexOf(":");
         this.channel = fromString.substring(0, splitIndex);
-        this.arguments.addAll(Arrays.asList(fromString.substring(splitIndex + 1).split(" ")));
+        this.arguments = Arrays.asList(fromString.substring(splitIndex + 1).split(" "));
     }
 
     public String getChannel() {

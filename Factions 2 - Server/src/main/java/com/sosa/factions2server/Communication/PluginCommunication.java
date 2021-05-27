@@ -6,6 +6,7 @@ import com.sosa.factions2server.Communication.Listeners.GuiMessageListener;
 import dev.westernpine.pipelines.api.Message;
 import dev.westernpine.pipelines.api.Request;
 import dev.westernpine.pipelines.live.server.BukkitPipeline;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -20,7 +21,7 @@ public class PluginCommunication {
      */
     public static void registerCommunication()
     {
-        communication = new BukkitPipeline(Factions2Server.getInstance(), "factions", "outgoing", "incoming");
+        communication = new BukkitPipeline(Factions2Server.getInstance(), "factions", "incoming", "outgoing");
         communication.onMessage(PluginCommunication::handleMessageReceived);
         communication.onRequest(PluginCommunication::handleRequestReceived);
         registerListeners();
@@ -33,14 +34,13 @@ public class PluginCommunication {
      */
     private static void handleMessageReceived(Message message)
     {
-        Factions2Server.getInstance().getLogger().info("received");
         PluginChannelMessage pluginMessage = new PluginChannelMessage(message.read(String.class));
 
         CommunicationListener listener = listeners.get(pluginMessage.getChannel());
 
         if (listener == null) return;
 
-        listener.onMessageReceived(pluginMessage.getArguments());
+        listener.onMessageReceived(Bukkit.getPlayer(message.getCarrier()), pluginMessage.getArguments());
     }
 
     /**

@@ -22,6 +22,8 @@ public enum PluginMessage {
     CREATE_FACTION_SUCCESS,
     CREATE_FACTION_TAG_TOO_SHORT,
     CREATE_FACTION_TAG_TOO_LONG,
+    DISBAND_YOU_ARE_NOT_IN_A_FACTION,
+    ONLY_ROLE_CAN_DO_THIS,
     SYNTAX_CREATE;
 
     //This is a mapping of each message to its contents
@@ -109,6 +111,10 @@ public enum PluginMessage {
                 return Arrays.asList("factions tags must be at least <length> characters.");
             case CREATE_FACTION_ALREADY_EXISTS:
                 return Arrays.asList("a faction with this tag already exists.");
+            case DISBAND_YOU_ARE_NOT_IN_A_FACTION:
+                return Arrays.asList("You are not in a faction.");
+            case ONLY_ROLE_CAN_DO_THIS:
+                return Arrays.asList("Only <role>s can do this.");
             default:
                 return new ArrayList<>();
         }

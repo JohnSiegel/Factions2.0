@@ -1,6 +1,7 @@
 package com.sosa.factions2server;
 
 import com.sosa.factions2server.Communication.PluginCommunication;
+import com.sosa.factions2server.GUI.BaseGUI;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Factions2Server extends JavaPlugin {
@@ -12,6 +13,8 @@ public final class Factions2Server extends JavaPlugin {
         // Plugin startup logic
         plugin = this;
         PluginCommunication.registerCommunication();
+        getServer().getPluginManager().registerEvents(new BaseGUI(), this);
+
     }
 
     @Override

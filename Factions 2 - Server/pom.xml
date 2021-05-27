@@ -9,7 +9,7 @@
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>Factions2 - Server</name>
+    <name>Factions 2 - Server</name>
 
     <properties>
         <java.version>1.8</java.version>

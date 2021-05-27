@@ -94,7 +94,7 @@ public class CreateCommand extends SubCommand {
     public List<String> suggest(Player source, String[] currentArgs) {
 
         if (currentArgs.length == 2) {
-            return Collections.singletonList("name");
+            return Collections.singletonList("[name]");
         }
 
         return null;

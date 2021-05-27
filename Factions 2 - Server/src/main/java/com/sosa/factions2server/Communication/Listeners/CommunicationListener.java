@@ -1,11 +1,11 @@
 package com.sosa.factions2server.Communication.Listeners;
 
-import dev.westernpine.pipelines.api.Message;
+import org.bukkit.entity.Player;
 
 import java.util.List;
 
 public interface CommunicationListener {
 
-    void onMessageReceived(List<String> arguments);
+    void onMessageReceived(Player recipient, List<String> arguments);
 
 }

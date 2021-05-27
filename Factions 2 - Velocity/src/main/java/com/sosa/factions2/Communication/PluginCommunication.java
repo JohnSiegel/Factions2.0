@@ -55,7 +55,7 @@ public class PluginCommunication {
 
         if (listener == null) return;
 
-        listener.onMessageReceived(pluginMessage.getArguments());
+        listener.onMessageReceived(message.getCarrier(), pluginMessage.getArguments());
     }
 
     /**
