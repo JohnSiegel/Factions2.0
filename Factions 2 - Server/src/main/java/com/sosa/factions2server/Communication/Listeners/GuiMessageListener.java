@@ -7,10 +7,14 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This listener listens for gui messages and opens the correct gui for the corresponding message.
+ */
 public class GuiMessageListener implements CommunicationListener{
 
     private final HashMap<String, Class<? extends BaseGUI>> GUICommandMap = new HashMap<>();
 
+    //This is where you register a command to a gui to open.
     public GuiMessageListener()
     {
         registerGUICommand("disband", DisbandGUI.class);

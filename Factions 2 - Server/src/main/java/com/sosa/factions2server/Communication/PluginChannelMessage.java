@@ -33,6 +33,7 @@ public class PluginChannelMessage {
         this.arguments = Arrays.asList(fromString.substring(splitIndex + 1).split(" "));
     }
 
+    //Getters and setters for the various fields.
     public String getChannel() {
         return channel;
     }
@@ -49,6 +50,11 @@ public class PluginChannelMessage {
         this.arguments = arguments;
     }
 
+    /**
+     * This method translates a plugin channel message to a formatted string for sending.
+     *
+     * @return A formatted string for sending.
+     */
     @Override
     public String toString() {
         String formatted = channel + ":";

@@ -50,7 +50,7 @@ public class CreateCommand extends SubCommand {
 
         String tag = args[0];
 
-        Faction faction = FactionManager.getFactions().get(tag);
+        Faction faction = FactionManager.getFactionsByTag().get(tag);
 
         if (faction != null)
         {

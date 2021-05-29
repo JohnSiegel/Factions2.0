@@ -1,15 +1,18 @@
 package com.sosa.factions2server.Communication;
 
 import com.sosa.factions2server.Communication.Listeners.CommunicationListener;
+import com.sosa.factions2server.Communication.Listeners.SynchronizationListener;
 import com.sosa.factions2server.Factions2Server;
 import com.sosa.factions2server.Communication.Listeners.GuiMessageListener;
 import dev.westernpine.pipelines.api.Message;
 import dev.westernpine.pipelines.api.Request;
+import dev.westernpine.pipelines.api.Response;
 import dev.westernpine.pipelines.live.server.BukkitPipeline;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class PluginCommunication {
 
@@ -44,6 +47,30 @@ public class PluginCommunication {
     }
 
     /**
+     * This function sends a request to the proxy using a player as a carrier.
+     * The first object in the delivered request payload will be a string object used as a "channel"
+     *
+     * @param player This is the player to carry the request.
+     * @param message This is the message to send as a request.
+     *
+     * @return A response to the request.
+     */
+    private static Response sendRequest(Player player, PluginChannelMessage message)
+    {
+        Request request = new Request(player.getUniqueId());
+        request.getPayload().add(message.getChannel());
+        request.getPayload().addAll(message.getArguments());
+
+        AtomicReference<Response> returnValue = new AtomicReference<>();
+
+        try {
+            request.send(communication).get().ifPresent(returnValue::set);
+        } catch (Exception ignored){}
+
+        return returnValue.get();
+    }
+
+    /**
      * This function is called when a request is received from another plugin.
      *
      * @param request This is the request received.
@@ -69,6 +96,7 @@ public class PluginCommunication {
     public static void registerListeners()
     {
         registerListener("gui", new GuiMessageListener());
+        registerListener("synchronize", new SynchronizationListener());
     }
 
     /**

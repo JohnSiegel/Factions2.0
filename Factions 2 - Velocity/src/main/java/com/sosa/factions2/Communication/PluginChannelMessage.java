@@ -1,12 +1,13 @@
 package com.sosa.factions2.Communication;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class PluginChannelMessage {
 
     private String channel;
-    private List<String> arguments;
+    private List<String> arguments = new ArrayList<>();
 
     /**
      * This constructor creates a plugin message to be sent on a specified channel with specified arguments.
@@ -32,6 +33,7 @@ public class PluginChannelMessage {
         this.arguments.addAll(Arrays.asList(fromString.substring(splitIndex + 1).split(" ")));
     }
 
+    //Getters and setters for the various fields.
     public String getChannel() {
         return channel;
     }
@@ -48,6 +50,11 @@ public class PluginChannelMessage {
         this.arguments = arguments;
     }
 
+    /**
+     * This method is called to translate a plugin communication message into a string to be sent.
+     *
+     * @return The string to be sent.
+     */
     @Override
     public String toString() {
         String formatted = channel + ":";

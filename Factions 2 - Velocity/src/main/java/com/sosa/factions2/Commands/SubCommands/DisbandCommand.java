@@ -24,6 +24,12 @@ public class DisbandCommand extends SubCommand{
         super(label);
     }
 
+    /**
+     * This function disbands the players faction if they are leader.
+     *
+     * @param source This is the sender of the subcommand.
+     * @param args These are the arguments of the subcommand.
+     */
     @Override
     public void execute(Player source, String[] args) {
 
@@ -43,10 +49,18 @@ public class DisbandCommand extends SubCommand{
             return;
         }
 
-        PluginChannelMessage msg = new PluginChannelMessage("gui", Arrays.asList("disband", faction.getTag()));
+        PluginChannelMessage msg = new PluginChannelMessage("gui", Arrays.asList("disband", "" + faction.getTag()));
         PluginCommunication.sendMessage(source, msg);
     }
 
+    /**
+     * This method returns the list of currently suggested arguments for a subcommand.
+     *
+     * @param source This is the sender of the command.
+     * @param currentArgs These are the current arguments of the command.
+     *
+     * @return The list of suggested arguments for the subcommand.
+     */
     @Override
     public List<String> suggest(Player source, String[] currentArgs) {
         return super.suggest(source, currentArgs);

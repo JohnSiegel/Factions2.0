@@ -9,7 +9,6 @@ public class FPlayer {
 
     private String uuid;
     private Faction faction;
-    private Player player;
     private String name;
 
     /**
@@ -20,11 +19,25 @@ public class FPlayer {
     public FPlayer(Player player)
     {
         this.uuid = player.getUniqueId().toString();
-        this.player = player;
         this.name = player.getUsername();
         this.faction = null;
     }
 
+    /**
+     * This constructor is used to create an FPlayer from pre established data.
+     *
+     * @param uuid This is the players uuid.
+     * @param faction This is the faction the player belongs too.
+     * @param name This is the name of the player.
+     */
+    public FPlayer(String uuid, Faction faction, String name)
+    {
+        this.uuid = uuid;
+        this.faction = faction;
+        this.name = name;
+    }
+
+    //Getters and setters for the various fields.
     public String getUuid() {
         return uuid;
     }
@@ -39,14 +52,6 @@ public class FPlayer {
 
     public void setFaction(Faction faction) {
         this.faction = faction;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 
     public String getName() {

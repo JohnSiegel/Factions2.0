@@ -1,7 +1,9 @@
 package com.sosa.factions2.Communication;
 
-import com.sosa.factions2.Communication.listeners.CommunicationListener;
-import com.sosa.factions2.Communication.listeners.GuiMessageListener;
+import com.sosa.factions2.Communication.RequestListeners.RequestListener;
+import com.sosa.factions2.Communication.MessageListeners.MessageListener;
+import com.sosa.factions2.Communication.MessageListeners.DisbandMessageListener;
+import com.sosa.factions2.Communication.MessageListeners.SynchronizeMessageListener;
 import com.sosa.factions2.Factions2;
 import com.velocitypowered.api.proxy.Player;
 import dev.westernpine.pipelines.api.Message;
@@ -17,7 +19,8 @@ import java.util.HashMap;
 public class PluginCommunication {
 
     private static Pipeline pipeline;
-    private static final HashMap<String, CommunicationListener> listeners = new HashMap<>();
+    private static final HashMap<String, MessageListener> messageListeners = new HashMap<>();
+    private static final HashMap<String, RequestListener> requestListeners = new HashMap<>();
 
     /**
      * This function is used to register the plugin messaging pipeline.
@@ -51,7 +54,7 @@ public class PluginCommunication {
 
         String channel = pluginMessage.getChannel();
 
-        CommunicationListener listener = listeners.get(channel);
+        MessageListener listener = messageListeners.get(channel);
 
         if (listener == null) return;
 
@@ -65,7 +68,13 @@ public class PluginCommunication {
      */
     private static void handleRequestReceived(Request request)
     {
+        String channel = (String) request.getPayload().get(0);
 
+        RequestListener listener = requestListeners.get(channel);
+
+        if (listener == null) return;
+
+        listener.respondToRequest(request).send(pipeline);
     }
 
     /**
@@ -73,7 +82,8 @@ public class PluginCommunication {
      */
     public static void registerListeners()
     {
-        registerListener("gui", new GuiMessageListener());
+        registerMessageListener("disband", new DisbandMessageListener());
+        registerMessageListener("synchronize", new SynchronizeMessageListener());
     }
 
     /**
@@ -82,9 +92,20 @@ public class PluginCommunication {
      * @param channel This is the channel to register to.
      * @param listener This is the listener to register.
      */
-    private static void registerListener(String channel, CommunicationListener listener)
+    private static void registerMessageListener(String channel, MessageListener listener)
     {
-        listeners.put(channel, listener);
+        messageListeners.put(channel, listener);
+    }
+
+    /**
+     * This function registers a plugin communication listener to a specified channel.
+     *
+     * @param channel This is the channel to register to.
+     * @param listener This is the listener to register.
+     */
+    private static void registerRequestListener(String channel, RequestListener listener)
+    {
+        requestListeners.put(channel, listener);
     }
 
     /**

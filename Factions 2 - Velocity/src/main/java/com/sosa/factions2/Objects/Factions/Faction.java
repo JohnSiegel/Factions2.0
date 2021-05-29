@@ -1,5 +1,7 @@
 package com.sosa.factions2.Objects.Factions;
 
+import com.sosa.factions2.Managers.FactionManager;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -36,6 +38,30 @@ public class Faction {
         this.memberTitles.put(leader, "");
     }
 
+    /**
+     * This constructor is used to create a pre established faction.
+     *
+     * @param leader This is the leader of the faction.
+     * @param tag This is the factions tag.
+     * @param desc This is the factions description.
+     * @param memberRoles These are the members and their roles.
+     * @param members These are the members.
+     * @param memberTitles These are the members and their titles.
+     *
+     * @return
+     */
+    public Faction(FPlayer leader, String tag, String desc, ArrayList<FPlayer> members,
+                   HashMap<FPlayer, FactionRole> memberRoles, HashMap<FPlayer, String> memberTitles)
+    {
+        this.leader = leader;
+        this.tag = tag;
+        this.desc = desc;
+        this.members = members;
+        this.memberRoles = memberRoles;
+        this.memberTitles = memberTitles;
+    }
+
+    //Getters and setters for the various fields.
     public FPlayer getLeader() {
         return leader;
     }
