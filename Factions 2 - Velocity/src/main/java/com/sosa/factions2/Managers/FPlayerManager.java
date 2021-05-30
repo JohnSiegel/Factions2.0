@@ -75,8 +75,8 @@ public class FPlayerManager {
         ArrayList<String> messagePacket = new ArrayList<>();
         for (FPlayer fPlayer : getfPlayers().values())
         {
-            Faction faction = fPlayer.getFaction();
-            messagePacket.add(fPlayer.getUuid() + "=" + (faction == null ? null : faction.getTag()));
+            String faction = fPlayer.getFactionTag();
+            messagePacket.add(fPlayer.getUuid() + "=" + faction);
         }
 
         for (RegisteredServer server : Factions2.getInstance().getProxyServer().getAllServers())

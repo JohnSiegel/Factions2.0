@@ -8,7 +8,7 @@ import com.velocitypowered.api.proxy.Player;
 public class FPlayer {
 
     private String uuid;
-    private Faction faction;
+    private String factionTag;
     private String name;
 
     /**
@@ -20,7 +20,7 @@ public class FPlayer {
     {
         this.uuid = player.getUniqueId().toString();
         this.name = player.getUsername();
-        this.faction = null;
+        this.factionTag = "na";
     }
 
     /**
@@ -30,10 +30,10 @@ public class FPlayer {
      * @param faction This is the faction the player belongs too.
      * @param name This is the name of the player.
      */
-    public FPlayer(String uuid, Faction faction, String name)
+    public FPlayer(String uuid, String faction, String name)
     {
         this.uuid = uuid;
-        this.faction = faction;
+        this.factionTag = faction;
         this.name = name;
     }
 
@@ -46,12 +46,12 @@ public class FPlayer {
         this.uuid = uuid;
     }
 
-    public Faction getFaction() {
-        return faction;
+    public String getFactionTag() {
+        return factionTag;
     }
 
-    public void setFaction(Faction faction) {
-        this.faction = faction;
+    public void setFaction(String faction) {
+        this.factionTag = faction;
     }
 
     public String getName() {

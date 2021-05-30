@@ -39,7 +39,7 @@ public class FactionManager {
     {
         Faction faction = new Faction(leader, tag);
         factionsByTag.put(tag, faction);
-        leader.setFaction(faction);
+        leader.setFaction(tag);
 
         FPlayerManager.synchronize();
     }
@@ -62,9 +62,13 @@ public class FactionManager {
      */
     public static void disbandFaction(Player disbander, Faction faction)
     {
+        if (faction == null)
+        {
+            PluginMessage.sendMessage(disbander, PluginMessage.COULD_NOT_FIND_FACTION);
+        }
         for (FPlayer fPlayer : faction.getMembers())
         {
-            fPlayer.setFaction(null);
+            fPlayer.setFaction("na");
             Factions2.getInstance().getProxyServer().getPlayer(UUID.fromString(fPlayer.getUuid()))
                     .ifPresent(player -> {
                 PluginMessage.sendMessage(player, PluginMessage.DISBANDED_YOUR_FACTION,

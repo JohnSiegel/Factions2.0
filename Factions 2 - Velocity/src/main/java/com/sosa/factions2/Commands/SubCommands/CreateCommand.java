@@ -1,5 +1,6 @@
 package com.sosa.factions2.Commands.SubCommands;
 
+import com.sosa.factions2.Factions2;
 import com.sosa.factions2.Managers.FPlayerManager;
 import com.sosa.factions2.Managers.FactionManager;
 import com.sosa.factions2.Objects.Factions.FPlayer;
@@ -42,7 +43,7 @@ public class CreateCommand extends SubCommand {
 
         FPlayer fPlayer = FPlayerManager.getFPlayer(source);
 
-        if (fPlayer.getFaction() != null)
+        if (!fPlayer.getFactionTag().equals("na"))
         {
             PluginMessage.sendMessage(source, PluginMessage.CREATE_ALREADY_IN_FAC);
             return;

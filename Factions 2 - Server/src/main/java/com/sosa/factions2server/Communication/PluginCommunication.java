@@ -55,7 +55,7 @@ public class PluginCommunication {
      *
      * @return A response to the request.
      */
-    private static Response sendRequest(Player player, PluginChannelMessage message)
+    public static Response sendRequest(Player player, PluginChannelMessage message)
     {
         Request request = new Request(player.getUniqueId());
         request.getPayload().add(message.getChannel());

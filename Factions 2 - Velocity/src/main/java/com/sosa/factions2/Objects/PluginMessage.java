@@ -25,6 +25,7 @@ public enum PluginMessage {
     DISBAND_YOU_ARE_NOT_IN_A_FACTION,
     ONLY_ROLE_CAN_DO_THIS,
     DISBANDED_YOUR_FACTION,
+    COULD_NOT_FIND_FACTION,
     SYNTAX_CREATE;
 
     //This is a mapping of each message to its contents
@@ -118,6 +119,8 @@ public enum PluginMessage {
                 return Arrays.asList("Only <role>s can do this.");
             case DISBANDED_YOUR_FACTION:
                 return Arrays.asList("<disbander> has disbanded your faction.");
+            case COULD_NOT_FIND_FACTION:
+                return Arrays.asList("Could not find faction <tag>");
             default:
                 return new ArrayList<>();
         }

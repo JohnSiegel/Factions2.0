@@ -54,10 +54,11 @@ public class DisbandGUI extends BaseGUI {
         im.setDisplayName(ChatColor.RED + "Cancel disband?");
         cancel.setItemMeta(im);
 
-        ItemStack fac = new ItemStack(Material.CRIMSON_SIGN);
+        ItemStack fac = new ItemStack(Material.NETHER_PORTAL);
         im = fac.getItemMeta();
         im.setDisplayName(ChatColor.BLUE + "Are you sure you would like");
         im.setLore(Arrays.asList(ChatColor.BLUE + "to disband " + ChatColor.GREEN + tag));
+        fac.setItemMeta(im);
 
         for (int i = 0; i < inv.getSize(); i++)
         {

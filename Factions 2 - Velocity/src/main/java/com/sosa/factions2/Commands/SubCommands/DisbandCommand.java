@@ -4,9 +4,11 @@ import com.sosa.factions2.Communication.PluginChannelMessage;
 import com.sosa.factions2.Communication.PluginCommunication;
 import com.sosa.factions2.Factions2;
 import com.sosa.factions2.Managers.FPlayerManager;
+import com.sosa.factions2.Managers.FactionManager;
 import com.sosa.factions2.Objects.Factions.FPlayer;
 import com.sosa.factions2.Objects.Factions.Faction;
 import com.sosa.factions2.Objects.Factions.FactionRole;
+import com.sosa.factions2.Objects.PermissionNode;
 import com.sosa.factions2.Objects.PluginMessage;
 import com.velocitypowered.api.proxy.Player;
 
@@ -34,7 +36,25 @@ public class DisbandCommand extends SubCommand{
     public void execute(Player source, String[] args) {
 
         FPlayer fPlayer = FPlayerManager.getFPlayer(source);
-        Faction faction = fPlayer.getFaction();
+        Faction faction = FactionManager.getFactionsByTag().get(fPlayer.getFactionTag());
+
+        if (args.length > 0)
+        {
+            if (PermissionNode.hasPermission(source, PermissionNode.DISBAND_OTHERS))
+            {
+                faction = FactionManager.getFactionsByTag().get(args[0]);
+                if (faction == null)
+                {
+                    PluginMessage.sendMessage(source, PluginMessage.COULD_NOT_FIND_FACTION, Arrays.asList("<tag>"), Arrays.asList(args[0]));
+                }
+                else
+                {
+                    PluginChannelMessage msg = new PluginChannelMessage("gui", Arrays.asList("disband", "" + faction.getTag()));
+                    PluginCommunication.sendMessage(source, msg);
+                    return;
+                }
+            }
+        }
 
         if (faction == null)
         {
@@ -42,7 +62,7 @@ public class DisbandCommand extends SubCommand{
             return;
         }
 
-        if (!faction.getMemberRoles().get(fPlayer).equals(FactionRole.LEADER))
+        if (!faction.getMemberRoles().get(fPlayer).equals(FactionRole.LEADER) && !PermissionNode.hasPermission(source, PermissionNode.DISBAND_OTHERS))
         {
             PluginMessage.sendMessage(source, PluginMessage.ONLY_ROLE_CAN_DO_THIS, Collections.singletonList("<role>"),
                     Collections.singletonList("Leader"));

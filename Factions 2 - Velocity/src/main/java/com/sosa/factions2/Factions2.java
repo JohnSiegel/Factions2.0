@@ -6,8 +6,10 @@ import com.sosa.factions2.Communication.PluginCommunication;
 import com.sosa.factions2.Listeners.JoinListener;
 import com.sosa.factions2.Managers.CommandManager;
 import com.sosa.factions2.Managers.ConfigManager;
+import com.sosa.factions2.Managers.FPlayerManager;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.Subscribe;
+import com.velocitypowered.api.event.proxy.ProxyShutdownEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.ProxyServer;
 import org.slf4j.Logger;
@@ -56,6 +58,17 @@ public class Factions2 {
         CommandManager.registerSubCommands();
         ConfigManager.loadConfigData();
         PluginCommunication.registerPipeline();
+        FPlayerManager.synchronize();
+    }
+
+    /**
+     * This function is an event handler for the server shutting down. It saves all player and faction data.
+     * @param event
+     */
+    @Subscribe
+    public void onProxyStop(ProxyShutdownEvent event)
+    {
+        ConfigManager.saveData();
     }
 
     /**
