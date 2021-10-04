@@ -1,2 +1,1 @@
-##<--------IMPORTANT-------->
 DISCONTINUED
